@@ -22,8 +22,18 @@ module "lb" {
         Owner       = "devops"
     }
 }
-
-
+module "nacl" {
+  source = "../../modules/nacl"
+  vpc_id                  = module.vpc.vpc_id
+  nacl_name = "nacl"
+  public_subnet_id = module.vpc.public_subnet_ids[0]
+  public_nacl_ingress_rules = local.public_nacl_ingress_rules
+  public_nacl_egress_rules  = local.public_nacl_egress_rules  
+  tags = {
+    Environment = "dev"
+    Owner       = "devops"
+  }
+}
 
 #########################################
 # LB 전용 SG
