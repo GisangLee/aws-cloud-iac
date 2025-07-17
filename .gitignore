@@ -32,3 +32,43 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+.env
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Output of the go coverage tool
+*.coverprofile
+*.coverage
+*.cov
+
+# Output of `go build` and `go install`
+/bin/
+/build/
+/dist/
+
+# Dependency directories (go mod tidy will restore these)
+vendor/
+
+# Go workspace files
+go.work
+go.work.sum
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
