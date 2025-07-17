@@ -4,7 +4,7 @@ variable "vpc_id" {
 }
 
 variable "nacl_name" {
-  type = string
+  type        = string
   description = "NACL Name"
 }
 
@@ -14,7 +14,7 @@ variable "public_subnet_id" {
 
 variable "public_nacl_ingress_rules" {
   description = "Ingress rules for public NACL"
-  type        = list(object({
+  type = list(object({
     rule_number = number
     protocol    = string
     from_port   = number
@@ -26,7 +26,7 @@ variable "public_nacl_ingress_rules" {
 
 variable "public_nacl_egress_rules" {
   description = "Egress rules for public NACL"
-  type        = list(object({
+  type = list(object({
     rule_number = number
     protocol    = string
     from_port   = number

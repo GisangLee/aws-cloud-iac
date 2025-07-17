@@ -8,7 +8,7 @@ variable "lb_type" {
 
 
 variable "tags" {
-  type = map(string)
+  type    = map(string)
   default = {}
 }
 
