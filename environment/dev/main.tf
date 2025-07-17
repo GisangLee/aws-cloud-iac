@@ -35,6 +35,36 @@ module "nacl" {
   }
 }
 
+
+module "eks" {
+  source = "../../modules/eks"
+
+  cluster_name        = "dev-eks"
+  kubernetes_version  = "1.31"
+  authentication_mode = "API"
+  subnet_ids          = module.vpc.private_subnet_ids
+  cluster_role_arn    = aws_iam_role.cluster.arn
+  node_role_arn       = aws_iam_role.eks-node-group-iam-role.arn
+
+  node_desired_size   = 2
+  node_min_size       = 1
+  node_max_size       = 3
+  node_group_name     = "eks-node-group"
+  instance_types      = ["t3.medium"]
+  # ✅ 의존성 명시: cluster IAM이 먼저 생성돼야 module.eks 실행
+  depends_on = [
+    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.eks-node-group-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.eks-node-group-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.eks-node-group-AmazonEC2ContainerRegistryReadOnly
+  ]
+
+  tags = {
+    Environment = "dev"
+    Owner       = "devops"
+  }
+}
+
 #########################################
 # LB 전용 SG
 #########################################
@@ -62,3 +92,5 @@ resource "aws_security_group" "alb" {
     Environment = "dev"
   }
 }
+
+
