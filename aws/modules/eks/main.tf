@@ -9,7 +9,7 @@ resource "aws_eks_cluster" "eks" {
   version  = var.kubernetes_version
 
   vpc_config {
-    subnet_ids = var.subnet_ids
+    subnet_ids = var.private_subnet_ids
   }
   tags = merge({
     Name = var.cluster_name
@@ -25,7 +25,7 @@ resource "aws_eks_node_group" "eks-cluster-node-group" {
   cluster_name    = var.cluster_name
   node_group_name = var.node_group_name
   node_role_arn   = var.node_role_arn
-  subnet_ids      = var.subnet_ids
+  subnet_ids      = var.private_subnet_ids
 
   scaling_config {
     desired_size = 1

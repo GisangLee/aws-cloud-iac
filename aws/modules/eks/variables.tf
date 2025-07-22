@@ -1,6 +1,9 @@
 variable "cluster_name" {}
 variable "kubernetes_version" {}
-variable "subnet_ids" {
+variable "private_subnet_ids" {
+  type = list(string)
+}
+variable "public_subnet_ids" {
   type = list(string)
 }
 variable "cluster_role_arn" {}
